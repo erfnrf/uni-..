@@ -43,4 +43,7 @@ def read_root(request: Request):
 @app.get("/students")
 def read_root(request: Request):
     return templates.TemplateResponse("index-students.html", {"request": request})
+@app.get("/professors")
+def read_root(request: Request):
+    return templates.TemplateResponse("index-prof.html", {"request": request})
     

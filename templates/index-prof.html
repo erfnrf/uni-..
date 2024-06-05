@@ -2,12 +2,12 @@
 <html lang="fa">
 <head>
     <meta charset="UTF-8">
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ثبت اطلاعات دانشجو</title>
+    <title>professors - University Management</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/jalaali-js@0.1.0/dist/jalaali.min.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/persian-datepicker/1.2.0/css/persian-datepicker.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/persian-datepicker/1.2.0/js/persian-datepicker.min.js"></script>
     <link rel="stylesheet" href="/static/style.css">
     <style>
         .select {
@@ -76,15 +76,57 @@
             errorField.innerHTML = "";
             return true;
         }
+
+        function updateCourses() {
+            var major = document.getElementById("major").value;
+            var courseSelect = document.getElementById("course_ids");
+            var courses = {
+                "مهندسی کامپیوتر": [
+                    {value: "code1", text: "درس ۱ کامپیوتر"},
+                    {value: "code2", text: "درس ۲ کامپیوتر"}
+                ],
+                "مهندسی برق": [
+                    {value: "code3", text: "درس ۱ برق"},
+                    {value: "code4", text: "درس ۲ برق"}
+                ],
+                "مهندسی مکانیک": [
+                    {value: "code5", text: "درس ۱ مکانیک"},
+                    {value: "code6", text: "درس ۲ مکانیک"}
+                ],
+                "مهندسی عمران": [
+                    {value: "code7", text: "درس ۱ عمران"},
+                    {value: "code8", text: "درس ۲ عمران"}
+                ],
+                "مهندسی معدن": [
+                    {value: "code9", text: "درس ۱ معدن"},
+                    {value: "code10", text: "درس ۲ معدن"}
+                ],
+                "مهندسی پلیمر": [
+                    {value: "code11", text: "درس ۱ پلیمر"},
+                    {value: "code12", text: "درس ۲ پلیمر"}
+                ]
+            };
+
+            // Clear current options
+            courseSelect.innerHTML = "";
+
+            // Add new options
+            courses[major].forEach(function(course) {
+                var option = document.createElement("option");
+                option.value = course.value;
+                option.text = course.text;
+                courseSelect.add(option);
+            });
+        }
     </script>
     <div class="container">
-        <h1>Students</h1>
+        <h1>professors</h1>
         <div class="container">
-            <h2>ثبت اطلاعات دانشجو</h2>
-            <form action="/submit_student_info" method="POST" onsubmit="return validateForm()">
+            <h2>ثبت اطلاعات اساتید</h2>
+            <form action="/submit_professors_info" method="POST" onsubmit="return validateForm()">
                 <div class="form-group">
-                    <label for="st_id">شماره دانشجویی:</label>
-                    <input type="text" id="st_id" name="student_id" required autocomplete="off">
+                    <label for="st_id">کد استاد:</label>
+                    <input type="text" id="st_id" name="professors_id" required autocomplete="off">
                     <div id="error-message" class="error-message"></div>
                 </div>
                 <div class="form-group">
@@ -96,22 +138,8 @@
                     <input type="text" id="l_name" name="last_name" required autocomplete="off">
                 </div>
                 <div class="form-group">
-                    <label for="father_name">نام پدر:</label>
-                    <input type="text" id="father_name" name="father_name" required autocomplete="off">
-                </div>
-                <div class="form-group">
                     <label for="birth_date">تاریخ تولد:</label>
-                    <input type="date" id="birth_date" name="birth_date" required autocomplete="off">
-                </div>
-                <div class="form-group">
-                    <label for="serial">سریال شناسنامه:</label>
-                    <div class="serial-inputs">
-                        <input type="text" id="serial_part1" name="serial_part1" required autocomplete="off" maxlength="3">
-                        <span>/</span>
-                        <input type="text" id="serial_part2" name="serial_part2" required autocomplete="off" maxlength="6">
-                        <span>/</span>
-                        <input type="text" id="serial_part3" name="serial_part3" required autocomplete="off" maxlength="2">
-                    </div>
+                    <input type="text" id="birth_date" name="birth_date" required autocomplete="off">
                 </div>
                 <div class="form-group">
                     <label for="city_of_birth">شهر تولد:</label>
@@ -165,8 +193,6 @@
                         <option value="همدان">همدان</option>
                         <option value="یاسوج">یاسوج</option>
                         <option value="یزد">یزد</option>
-                        
-                        
                     </select>
                 </div>
                 <div class="form-group">
@@ -194,8 +220,15 @@
                     <input type="text" id="department" name="department" required autocomplete="off">
                 </div>
                 <div class="form-group">
-                    <label for="major">رشته:</label>
-                    <input type="text" id="major" name="major" required autocomplete="off">
+                    <label for="major">رشته تحصیلی:</label>
+                    <select id="major" name="major" required onchange="updateCourses()">
+                        <option value="مهندسی کامپیوتر">مهندسی کامپیوتر</option>
+                        <option value="مهندسی برق">مهندسی برق</option>
+                        <option value="مهندسی مکانیک">مهندسی مکانیک</option>
+                        <option value="مهندسی عمران">مهندسی عمران</option>
+                        <option value="مهندسی معدن">مهندسی معدن</option>
+                        <option value="مهندسی پلیمر">مهندسی پلیمر</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="marital_status">وضعیت تاهل:</label>
@@ -205,26 +238,35 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="student_course_ids"> دروس:</label>
-                    <input type="text" id="student_course_ids" name="student_course_ids" required autocomplete="off">
-                </div>
-                <div class="form-group">
-                    <label for="professor_ids">کد اساتید:</label>
-                    <select id="professor_ids" name="professor_ids" required autocomplete="off">>
+                    <label for="course_ids">دروس:</label>
+                    <select id="course_ids" name="course_ids" required>
                         <option value="" disabled selected>انتخاب کنید</option>
-                        <option value="professor1">رشنو ارمین</option>
-                        <option value="professor2">لیلا یوسفوند</option>
-                        <option value="professor3">e3 </option>
-                        <option value="professor4">e4</option>
-                        <option value="professor5">e5</option>
-                        <option value="professor6">e6</option>
+                        <!-- دروس بر اساس رشته تحصیلی به روز می‌شوند -->
                     </select>
                 </div>
-                
+                <div class="form-group">
+                    <label for="professor_courses">کد دروس:</label>
+                    <select>
+                        <option value="code_course1">درس1</option>
+                        <option value="code_course2">درس2</option>
+                        <option value="code_course3">درس3</option>
+                        <option value="code_course4">درس4</option>
+                        <option value="code_course5">درس5</option>
+
+                    </select>
+                </div>
                 <div class="form-group">
                     <button type="submit">ثبت</button>
                 </div>
             </form>
+            <script>
+                $(document).ready(function() {
+                    $("#birth_date").persianDatepicker({
+                        format: 'YYYY/MM/DD'
+                    });
+                    updateCourses(); // در هنگام بارگذاری صفحه، دروس را بر اساس رشته پیش‌فرض به روزرسانی می‌کند
+                });
+            </script>
         </div>
     </div>
 </body>
