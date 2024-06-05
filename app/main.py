@@ -39,3 +39,8 @@ app.include_router(courses.router)
 @app.get("/",)
 def read_root(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
+
+@app.get("/students")
+def read_root(request: Request):
+    return templates.TemplateResponse("index-students.html", {"request": request})
+    

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students - University Management</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: inline-block;
+            width: 150px; /* تنظیم عرض برچسب */
+            text-align: right;
+            margin-right: 10px; /* فاصله بین برچسب و ورودی */
+        }
+        .form-group input {
+            width: 200px; /* تنظیم عرض ورودی */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1>University Management</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li class="current"><a href="/students">Students</a></li>
+                    <li><a href="/professors">Professors</a></li>
+                    <li><a href="/courses">Courses</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1>Students</h1>
+        <div class="container">
+            <h2>ثبت اطلاعات دانشجو</h2>
+            <form action="/submit_student_info" method="POST">
+                <div class="form-group">
+                    <label for="st_id">شماره دانشجویی:</label>
+                    <input type="text" id="st_id" name="student_id" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="f_name">نام:</label>
+                    <input type="text" id="f_name" name="first_name" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="l_name">نام خانوادگی:</label>
+                    <input type="text" id="l_name" name="last_name" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="father_name">نام پدر:</label>
+                    <input type="text" id="father_name" name="father_name" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="birth_date">تاریخ تولد:</label>
+                    <input type="date" id="birth_date" name="birth_date" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="study_period">سریال شناسنامه</label>
+                    <input type="text" id="serial" name="serial" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="city_of_birth">شهر تولد:</label>
+                    <input type="text" id="city_of_birth" name="city_of_birth" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="address">آدرس:</label>
+                    <input type="text" id="address" name="address" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="postal_code">کد پستی:</label>
+                    <input type="text" id="postal_code" name="postal_code" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="phone_number">تلفن همراه:</label>
+                    <input type="text" id="phone_number" name="phone_number" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="home_phone">تلفن ثابت:</label>
+                    <input type="text" id="home_phone" name="home_phone" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="national_id">کد ملی:</label>
+                    <input type="text" id="national_id" name="national_id" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="department">دانشکده:</label>
+                    <input type="text" id="department" name="department" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="major">رشته:</label>
+                    <input type="text" id="major" name="major" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="married">وضعیت تاهل:</label>
+                    <input type="text" id="married" name="married" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="student_course_ids">شناسه‌های دروس:</label>
+                    <input type="text" id="student_course_ids" name="student_course_ids" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="professor_ids">کد اساتید:</label>
+                    <input type="text" id="professor_ids" name="professor_ids" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="extra_info">توضیحات اضافی:</label>
+                    <input type="text" id="extra_info" name="extra_info" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="membership_status">وضعیت عضویت:</label>
+                    <input type="text" id="membership_status" name="membership_status" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="employment_status">وضعیت اشتغال:</label>
+                    <input type="text" id="employment_status" name="employment_status" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="student_condition">شرایط دانشجویی:</label>
+                    <input type="text" id="student_condition" name="student_condition" required autocomplete="off">
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit">ثبت</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

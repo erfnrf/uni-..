@@ -16,7 +16,7 @@ header {
     color: #fff;
     padding-top: 30px;
     min-height: 70px;
-    border-bottom: #77cc6d 3px solid;
+    border-bottom: #3700ff 3px solid;
 }
 
 header a {
@@ -54,10 +54,10 @@ button, input[type="submit"] {
     display: inline-block;
     height: 30px;
     margin: 10px 0;
-    padding: 0 20px;
+    padding: 0 200px;
     vertical-align: middle;
     white-space: nowrap;
-    background: #77cc6d;
+    background: #3700ff;
     border: 1px solid transparent;
     border-radius: 4px;
     font-size: 14px;
