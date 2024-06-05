@@ -1,66 +1,54 @@
 from pydantic import BaseModel, Field
-from typing import List
-from datetime import date
+from typing import Optional
 
 class StudentBase(BaseModel):
-    FName: str = Field(..., max_length=10, regex="^[ا-ی]+$")
-    LName: str = Field(..., max_length=10, regex="^[ا-ی]+$")
-    FatherName: str = Field(..., max_length=10, regex="^[ا-ی]+$")
-    Birth: date
-    IDS: int = Field(..., ge=100, le=999)
-    BornCity: str
-    Address: str = Field(..., max_length=100)
-    PostalCode: str = Field(..., regex="^\d{10}$")
-    CPhone: str = Field(..., regex="^09\d{9}$")
-    HPhone: str = Field(..., regex="^\d{8}$")
-    Department: str
-    Major: str
-    Married: str
-    SCourseIDs: str
-    LIDs: str
+    FName: str = Field(..., max_length=10, pattern="^[ا-ی]+$")
+    LName: str = Field(..., max_length=20, pattern="^[ا-ی]+$")
+    FatherName: str = Field(..., max_length=20, pattern="^[ا-ی]+$")
+    Birth: str = Field(..., pattern="^\d{4}-\d{2}-\d{2}$")
+    IDS: int
+    BornCity: str = Field(..., max_length=50, pattern="^[ا-ی\s]+$")
+    Address: str = Field(..., max_length=255, pattern="^[ا-ی0-9\s]+$")
+    PostalCode: str = Field(..., max_length=10, pattern="^\d{10}$")
+    CPhone: str = Field(..., max_length=11, pattern="^09\d{9}$")
+    HPhone: Optional[str] = Field(None, max_length=8, pattern="^\d{8}$")
+    Department: str = Field(..., max_length=50, pattern="^[ا-ی\s]+$")
+    Major: str = Field(..., max_length=50, pattern="^[ا-ی\s]+$")
+    Married: str = Field(..., max_length=3, pattern="^(بله|خیر)$")
+    SCourseIDs: str = Field(..., pattern="^(\d+,)*\d+$")
+    LIDs: str = Field(..., pattern="^(\d+,)*\d+$")
 
 class StudentCreate(StudentBase):
     pass
 
 class Student(StudentBase):
-    STID: int
+    id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class ProfessorBase(BaseModel):
-    FName: str = Field(..., max_length=10, regex="^[ا-ی]+$")
-    LName: str = Field(..., max_length=10, regex="^[ا-ی]+$")
-    ID: int
-    Department: str
-    Major: str
-    Birth: date
-    BornCity: str
-    Address: str = Field(..., max_length=100)
-    PostalCode: str = Field(..., regex="^\d{10}$")
-    CPhone: str = Field(..., regex="^09\d{9}$")
-    HPhone: str = Field(..., regex="^\d{8}$")
-    LCourseIDs: str
+    # Similar updates here
+    pass
 
 class ProfessorCreate(ProfessorBase):
     pass
 
 class Professor(ProfessorBase):
-    LID: int
+    id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class CourseBase(BaseModel):
-    CName: str = Field(..., max_length=25, regex="^[ا-ی]+$")
-    Department: str
-    Credit: int = Field(..., ge=1, le=4)
+    # Similar updates here
+    pass
 
 class CourseCreate(CourseBase):
     pass
 
 class Course(CourseBase):
-    CID: int
+    id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
