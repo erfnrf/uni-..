@@ -18,6 +18,17 @@
         .form-group input {
             width: 200px; /* تنظیم عرض ورودی */
         }
+        .serial-inputs {
+            display: inline-flex;
+            align-items: center;
+        }
+        .serial-inputs input {
+            width: 50px; /* عرض کوچکتر برای هر بخش از سریال شناسنامه */
+            margin-left: 5px;
+        }
+        .serial-inputs span {
+            margin-left: 5px;
+        }
     </style>
 </head>
 <body>
@@ -63,8 +74,14 @@
                     <input type="date" id="birth_date" name="birth_date" required autocomplete="off">
                 </div>
                 <div class="form-group">
-                    <label for="study_period">سریال شناسنامه</label>
-                    <input type="text" id="serial" name="serial" required autocomplete="off">
+                    <label for="serial">سریال شناسنامه:</label>
+                    <div class="serial-inputs">
+                        <input type="text" id="serial_part1" name="serial_part1" required autocomplete="off" maxlength="3">
+                        <span>/</span>
+                        <input type="text" id="serial_part2" name="serial_part2" required autocomplete="off" maxlength="6">
+                        <span>/</span>
+                        <input type="text" id="serial_part3" name="serial_part3" required autocomplete="off" maxlength="2">
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="city_of_birth">شهر تولد:</label>
@@ -103,28 +120,12 @@
                     <input type="text" id="married" name="married" required autocomplete="off">
                 </div>
                 <div class="form-group">
-                    <label for="student_course_ids">شناسه‌های دروس:</label>
+                    <label for="student_course_ids"> دروس:</label>
                     <input type="text" id="student_course_ids" name="student_course_ids" required autocomplete="off">
                 </div>
                 <div class="form-group">
                     <label for="professor_ids">کد اساتید:</label>
                     <input type="text" id="professor_ids" name="professor_ids" required autocomplete="off">
-                </div>
-                <div class="form-group">
-                    <label for="extra_info">توضیحات اضافی:</label>
-                    <input type="text" id="extra_info" name="extra_info" required autocomplete="off">
-                </div>
-                <div class="form-group">
-                    <label for="membership_status">وضعیت عضویت:</label>
-                    <input type="text" id="membership_status" name="membership_status" required autocomplete="off">
-                </div>
-                <div class="form-group">
-                    <label for="employment_status">وضعیت اشتغال:</label>
-                    <input type="text" id="employment_status" name="employment_status" required autocomplete="off">
-                </div>
-                <div class="form-group">
-                    <label for="student_condition">شرایط دانشجویی:</label>
-                    <input type="text" id="student_condition" name="student_condition" required autocomplete="off">
                 </div>
                 
                 <div class="form-group">
