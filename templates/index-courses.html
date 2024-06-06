@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professors - University Management</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/persian-datepicker/1.2.0/css/persian-datepicker.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/persian-datepicker/1.2.0/js/persian-datepicker.min.js"></script>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        .select {
+            width: 200px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: inline-block;
+            width: 150px;
+            text-align: right;
+            margin-right: 10px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 200px;
+        }
+
+        .serial-inputs {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .serial-inputs input {
+            width: 50px;
+            margin-left: 5px;
+        }
+
+        .serial-inputs span {
+            margin-left: 5px;
+        }
+
+        .error-message {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1>University Management</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li class="current"><a href="/students">Students</a></li>
+                    <li><a href="/professors">Professors</a></li>
+                    <li><a href="/courses">Courses</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <script>
+        function validateForm() {
+            var cid = document.getElementById("cid").value;
+            var errorField = document.getElementById("error-message");
+            if (cid.length !== 5) {
+                errorField.innerHTML = " کد درس باید دقیقاً 5 رقم باشد.";
+                return false;
+            }
+            errorField.innerHTML = "";
+            return true;
+        }
+
+        function updateCourses() {
+            var college = document.getElementById("college").value;
+            var courseSelect = document.getElementById("course_ids");
+            var courses = {
+                "فنی و مهندسی": [
+                    {value: "code1", text: "درس ۱ فنی و مهندسی"},
+                    {value: "code2", text: "درس ۲ فنی و مهندسی"}
+                ],
+                "علوم پایه": [
+                    {value: "code3", text: "درس ۱ علوم پایه"},
+                    {value: "code4", text: "درس ۲ علوم پایه"}
+                ],
+                "دامپزشکی": [
+                    {value: "code5", text: "درس ۱ دامپزشکی"},
+                    {value: "code6", text: "درس ۲ دامپزشکی"}
+                ],
+                "ادبیات و اقتصاد": [
+                    {value: "code7", text: "درس ۱ ادبیات و اقتصاد"},
+                    {value: "code8", text: "درس ۲ ادبیات و اقتصاد"}
+                ]
+            };
+
+            // Clear current options
+            courseSelect.innerHTML = "";
+
+            // Add new options
+            courses[college].forEach(function(course) {
+                var option = document.createElement("option");
+                option.value = course.value;
+                option.text = course.text;
+                courseSelect.add(option);
+            });
+        }
+    </script>
+    <div class="container">
+        <h1>Courses</h1>
+        <div class="container">
+            <h2>ثبت دروس</h2>
+            <form action="/submit_courses" method="POST" onsubmit="return validateForm()">
+                <div class="form-group">
+                    <label for="cid">کد درس:</label>
+                    <input type="text" id="cid" name="cid" required autocomplete="off">
+                    <div id="error-message" class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <label for="college">دانشکده:</label>
+                    <select id="college" name="college" required onchange="updateCourses()">
+                        <option value="" disabled selected>انتخاب کنید</option>
+                        <option value="فنی و مهندسی">فنی و مهندسی</option>
+                        <option value="علوم پایه">علوم پایه</option>
+                        <option value="دامپزشکی">دامپزشکی</option>
+                        <option value="ادبیات و اقتصاد">ادبیات و اقتصاد</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="course_ids">نام درس:</label>
+                    <select id="course_ids" name="course_ids" required>
+                        <option value="" disabled selected>انتخاب کنید</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="credit">تعداد واحد:</label>
+                    <select id="credit" name="credit" required>
+                        <option value="1واحدی">1واحدی</option>
+                        <option value="2واحدی">2واحدی</option>
+                        <option value="3واحدی">3واحدی</option>
+                        <option value="4واحدی">4واحدی</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="submit">ثبت</button>
+                </div>
+            </form>
+            <script>
+                $(document).ready(function() {
+                    $("#birth_date").persianDatepicker({
+                        format: 'YYYY/MM/DD'
+                    });
+                    updateCourses(); // در هنگام بارگذاری صفحه، دروس را بر اساس رشته پیش‌فرض به روزرسانی می‌کند
+                });
+            </script>
+        </div>
+    </div>
+</body>
+</html>
