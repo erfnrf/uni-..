@@ -25,9 +25,28 @@
             margin-right: 10px; /* فاصله بین برچسب و ورودی */
         }
 
-        .form-group input,
+        
         .form-group select {
-            width: 200px; /* عرض ورودی‌ها و باکس سلکت */
+            width: 210px; /* عرض ورودی‌ها و باکس سلکت */
+        }
+        .form-group input{
+            width:200px
+        }
+        .form-group1 {
+            margin-bottom: 15px;
+        }
+
+        .form-group1 label {
+            display: inline-block;
+            width: 150px; /* عرض برچسب */
+            text-align: right;
+            margin-right: 10px; /* فاصله بین برچسب و ورودی */
+        }
+        .form-group1 select {
+            width: 50px; /* عرض ورودی‌ها و باکس سلکت */
+        }
+        .form-group1 input {
+            width : 150px;
         }
 
         .serial-inputs {
@@ -43,10 +62,16 @@
         .serial-inputs span {
             margin-left: 5px;
         }
+        
 
         .error-message {
             color: red;
         }
+        #landline {
+        font-size: 15px; /* اندازه فونت */
+        width: 145px; /* عرض */
+        }
+
     </style>
 </head>
 <body>
@@ -207,9 +232,45 @@
                     <label for="phone_number">تلفن همراه:</label>
                     <input type="text" id="phone_number" name="phone_number" required autocomplete="off">
                 </div>
-                <div class="form-group">
-                    <label for="home_phone">تلفن ثابت:</label>
-                    <input type="text" id="home_phone" name="home_phone" required autocomplete="off">
+                <div class="form-group1">
+                    <label for="landline">تلفن ثابت:</label>
+                    <div class="serial-inputs">
+                        <select id="landline_code" name="landline_code" class="select" required autocomplete="off">
+                            <option value="" disabled selected>کد</option>
+                            <option value="011">011 - ساری</option>
+                            <option value="013">013 - رشت</option>
+                            <option value="017">017 - گرگان</option>
+                            <option value="021">021 - تهران</option>
+                            <option value="023">023 - سمنان</option>
+                            <option value="024">024 - زنجان</option>
+                            <option value="025">025 - قم</option>
+                            <option value="026">026 - کرج</option>
+                            <option value="028">028 - قزوین</option>
+                            <option value="031">031 - اصفهان</option>
+                            <option value="034">034 - کرمان</option>
+                            <option value="035">035 - یزد</option>
+                            <option value="038">038 - شهرکرد</option>
+                            <option value="041">041 - تبریز</option>
+                            <option value="044">044 - ارومیه</option>
+                            <option value="045">045 - اردبیل</option>
+                            <option value="054">054 - زاهدان</option>
+                            <option value="056">056 - بجنورد</option>
+                            <option value="058">058 - بیرجند</option>
+                            <option value="061">061 - اهواز</option>
+                            <option value="066">066 - لرستان</option>
+                            <option value="071">071 - شیراز</option>
+                            <option value="074">074 - کهگیلویه و بویراحمد</option>
+                            <option value="076">076 - بندرعباس</option>
+                            <option value="077">077 - بوشهر</option>
+                            <option value="081">081 - همدان</option>
+                            <option value="083">083 - کرمانشاه</option>
+                            <option value="084">084 - ایلام</option>
+                            <option value="086">086 - اراک</option>
+                            <option value="087">087 - سنندج</option>
+                                                    
+                        </select>
+                        <input type="text" id="landline" name="landline" required autocomplete="off" maxlength="8" placeholder="شماره" width="20px">
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="national_id">کد ملی:</label>

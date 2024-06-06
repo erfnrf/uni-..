@@ -2,12 +2,10 @@
 <html lang="fa">
 <head>
     <meta charset="UTF-8">
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ثبت اطلاعات دانشجو</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/jalaali-js@0.1.0/dist/jalaali.min.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/style.css">
     <style>
         .select {
@@ -25,9 +23,28 @@
             margin-right: 10px; /* فاصله بین برچسب و ورودی */
         }
 
-        .form-group input,
+        
         .form-group select {
-            width: 200px; /* عرض ورودی‌ها و باکس سلکت */
+            width: 210px; /* عرض ورودی‌ها و باکس سلکت */
+        }
+        .form-group input{
+            width:200px
+        }
+        .form-group1 {
+            margin-bottom: 15px;
+        }
+
+        .form-group1 label {
+            display: inline-block;
+            width: 150px; /* عرض برچسب */
+            text-align: right;
+            margin-right: 10px; /* فاصله بین برچسب و ورودی */
+        }
+        .form-group1 select {
+            width: 50px; /* عرض ورودی‌ها و باکس سلکت */
+        }
+        .form-group1 input {
+            width : 150px;
         }
 
         .serial-inputs {
@@ -48,6 +65,11 @@
         .error-message {
             color: red;
         }
+        #landline {
+        font-size: 15px; /* اندازه فونت */
+        width: 145px; /* عرض */
+        }
+
     </style>
 </head>
 <body>
@@ -68,34 +90,34 @@
     </header>
     <script>
         function updateMajors() {
-    const college = document.getElementById("college").value;
-    const majorDropdown = document.getElementById("major");
+            const college = document.getElementById("college").value;
+            const majorDropdown = document.getElementById("major");
 
-    const majors = {
-        "فنی و مهندسی": ["مهندسی برق", "مهندسی کامپیوتر", "مهندسی عمران", "مهندسی مکانیک"],
-        "علوم پایه": ["ریاضیات", "فیزیک", "شیمی", "زیست‌شناسی"],
-        "دامپزشکی": ["دامپزشکی عمومی", "تخصصی"],
-        "ادبیات و اقتصاد": ["ادبیات فارسی", "علوم اقتصادی", "مدیریت"]
-    };
+            const majors = {
+                "فنی و مهندسی": ["مهندسی برق", "مهندسی کامپیوتر", "مهندسی عمران", "مهندسی مکانیک"],
+                "علوم پایه": ["ریاضیات", "فیزیک", "شیمی", "زیست‌شناسی"],
+                "دامپزشکی": ["دامپزشکی عمومی", "تخصصی"],
+                "ادبیات و اقتصاد": ["ادبیات فارسی", "علوم اقتصادی", "مدیریت"]
+            };
 
-    // Clear existing options
-    majorDropdown.innerHTML = "";
+            // Clear existing options
+            majorDropdown.innerHTML = "";
 
-    // Populate with options based on selected college
-    if (college && majors[college]) {
-        majors[college].forEach(function(maj) {
-            const option = document.createElement("option");
-            option.value = maj;
-            option.text = maj;
-            majorDropdown.add(option);
+            // Populate with options based on selected college
+            if (college && majors[college]) {
+                majors[college].forEach(function(maj) {
+                    const option = document.createElement("option");
+                    option.value = maj;
+                    option.text = maj;
+                    majorDropdown.add(option);
+                });
+            }
+        }
+
+        // Call the function when the page loads
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.getElementById('college').addEventListener('change', updateMajors);
         });
-    }
-}
-
-// Call the function when the page loads
-document.addEventListener('DOMContentLoaded', (event) => {
-    document.getElementById('college').addEventListener('change', updateMajors);
-});
 
         function validateForm() {
             var studentId = document.getElementById("st_id").value;
@@ -107,7 +129,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
             errorField.innerHTML = "";
             return true;
         }
-        
     </script>
     <div class="container">
         <h1>Students</h1>
@@ -141,7 +162,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                         <input type="text" id="b3" name="b3" required autocomplete="off" maxlength="2" placeholder="روز">
                     </div>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="serial">سریال شناسنامه:</label>
                     <div class="serial-inputs">
@@ -204,8 +225,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
                         <option value="همدان">همدان</option>
                         <option value="یاسوج">یاسوج</option>
                         <option value="یزد">یزد</option>
-                        
-                        
                     </select>
                 </div>
                 <div class="form-group">
@@ -220,13 +239,49 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     <label for="phone_number">تلفن همراه:</label>
                     <input type="text" id="phone_number" name="phone_number" required autocomplete="off" maxlength="11">
                 </div>
-                <div class="form-group">
-                    <label for="home_phone">تلفن ثابت:</label>
-                    <input type="text" id="home_phone" name="home_phone" required autocomplete="off"maxlength="12">
+                <div class="form-group1">
+                    <label for="landline">تلفن ثابت:</label>
+                    <div class="serial-inputs">
+                        <select id="landline_code" name="landline_code" class="select" required autocomplete="off">
+                            <option value="" disabled selected>کد</option>
+                            <option value="011">011 - ساری</option>
+                            <option value="013">013 - رشت</option>
+                            <option value="017">017 - گرگان</option>
+                            <option value="021">021 - تهران</option>
+                            <option value="023">023 - سمنان</option>
+                            <option value="024">024 - زنجان</option>
+                            <option value="025">025 - قم</option>
+                            <option value="026">026 - کرج</option>
+                            <option value="028">028 - قزوین</option>
+                            <option value="031">031 - اصفهان</option>
+                            <option value="034">034 - کرمان</option>
+                            <option value="035">035 - یزد</option>
+                            <option value="038">038 - شهرکرد</option>
+                            <option value="041">041 - تبریز</option>
+                            <option value="044">044 - ارومیه</option>
+                            <option value="045">045 - اردبیل</option>
+                            <option value="054">054 - زاهدان</option>
+                            <option value="056">056 - بجنورد</option>
+                            <option value="058">058 - بیرجند</option>
+                            <option value="061">061 - اهواز</option>
+                            <option value="066">066 - لرستان</option>
+                            <option value="071">071 - شیراز</option>
+                            <option value="074">074 - کهگیلویه و بویراحمد</option>
+                            <option value="076">076 - بندرعباس</option>
+                            <option value="077">077 - بوشهر</option>
+                            <option value="081">081 - همدان</option>
+                            <option value="083">083 - کرمانشاه</option>
+                            <option value="084">084 - ایلام</option>
+                            <option value="086">086 - اراک</option>
+                            <option value="087">087 - سنندج</option>
+                                                    
+                        </select>
+                        <input type="text" id="landline" name="landline" required autocomplete="off" maxlength="8" placeholder="شماره" width="20px">
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="national_id">کد ملی:</label>
-                    <input type="text" id="national_id" name="national_id" required autocomplete="off"maxlength="10">
+                    <input type="text" id="national_id" name="national_id" required autocomplete="off" maxlength="10">
                 </div>
                 <div class="form-group">
                     <label for="college">دانشکده:</label>
@@ -252,22 +307,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="student_course_ids"> دروس:</label>
+                    <label for="student_course_ids">دروس:</label>
                     <input type="text" id="student_course_ids" name="student_course_ids" required autocomplete="off">
                 </div>
                 <div class="form-group">
                     <label for="professor_ids">کد اساتید:</label>
-                    <select id="professor_ids" name="professor_ids" required autocomplete="off">>
+                    <select id="professor_ids" name="professor_ids" required autocomplete="off">
                         <option value="" disabled selected>انتخاب کنید</option>
                         <option value="professor1">رشنو ارمین</option>
                         <option value="professor2">لیلا یوسفوند</option>
-                        <option value="professor3">professors3 </option>
+                        <option value="professor3">professors3</option>
                         <option value="professor4">professors4</option>
                         <option value="professor5">professors5</option>
                         <option value="professor6">professors6</option>
                     </select>
                 </div>
-                
                 <div class="form-group">
                     <button type="submit">ثبت</button>
                 </div>
