@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <title>فرم دانشجو</title>
+</head>
+<body>
+    <h1>فرم ثبت اطلاعات دانشجو</h1>
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.student_id.label }}<br>
+            {{ form.student_id(size=20) }}
+        </p>
+        <p>
+            {{ form.first_name.label }}<br>
+            {{ form.first_name(size=20) }}
+        </p>
+        <p>
+            {{ form.last_name.label }}<br>
+            {{ form.last_name(size=20) }}
+        </p>
+        <!-- سایر فیلدهای فرم به همین صورت اضافه کنید -->
+        <p>
+            {{ form.submit() }}
+        </p>
+    </form>
+</body>
+</html>
