@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>professors - University Management</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Professors - University Management</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/persian-datepicker/1.2.0/css/persian-datepicker.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/persian-datepicker/1.2.0/js/persian-datepicker.min.js"></script>
@@ -27,7 +26,7 @@
 
         
         .form-group select {
-            width: 210px; /* عرض ورودی‌ها و باکس سلکت */
+            width: 208px; /* عرض ورودی‌ها و باکس سلکت */
         }
         .form-group input{
             width:200px
@@ -92,16 +91,75 @@
     </header>
     <script>
         function validateForm() {
-            var studentId = document.getElementById("st_id").value;
-            var errorField = document.getElementById("error-message");
-            if (studentId.length !== 11) {
-                errorField.innerHTML = "شماره دانشجویی باید دقیقاً 11 رقم باشد.";
-                return false;
-            }
-            errorField.innerHTML = "";
-            return true;
-        }
+            var pf_id= document.getElementById("pf_id").value;
+            var postal_code = document.getElementById("postal_code").value;
+            var phone_number = document.getElementById("phone_number").value;
+            var national_id = document.getElementById("national_id").value;
 
+            var errorField1 = document.getElementById("error-message1");
+            var errorField2 = document.getElementById("error-message2");
+            var errorField3 = document.getElementById("error-message3");
+            var errorField4 = document.getElementById("error-message4");
+
+            var valid = true;
+
+            if (pf_id.length !== 6) {
+                errorField1.innerHTML = "کد استاد باید 6 رقم باشد";
+                valid = false;
+            } else {
+                errorField1.innerHTML = "";
+            }
+
+            if (postal_code.length !== 10) {
+                errorField2.innerHTML = "کد پستی باید 10 رقم باشد.";
+                valid = false;
+            } else {
+                errorField2.innerHTML = "";
+            }
+
+            if (phone_number.length !== 11) {
+                errorField3.innerHTML = "شماره تلفن باید 11 رقم باشد.";
+                valid = false;
+            } else {
+                errorField3.innerHTML = "";
+            }
+
+            if (national_id.length !== 10) {
+                errorField4.innerHTML = "کد ملی باید 10 رقم باشد.";
+                valid = false;
+            } else {
+                errorField4.innerHTML = "";
+            }
+
+            return valid;
+        }
+        function updateMajors() {
+            const college = document.getElementById("college").value;
+            const majorDropdown = document.getElementById("major");
+
+            const majors = {
+                "فنی و مهندسی": ["مهندسی برق", "مهندسی کامپیوتر", "مهندسی عمران", "مهندسی مکانیک"],
+                "علوم پایه": ["ریاضیات", "فیزیک", "شیمی", "زیست‌شناسی"],
+                "دامپزشکی": ["دامپزشکی عمومی", "تخصصی"],
+                "ادبیات و اقتصاد": ["ادبیات فارسی", "علوم اقتصادی", "مدیریت"]
+            };
+
+            // Clear existing options
+            majorDropdown.innerHTML = "";
+
+            // Populate with options based on selected college
+            if (college && majors[college]) {
+                majors[college].forEach(function(maj) {
+                    const option = document.createElement("option");
+                    option.value = maj;
+                    option.text = maj;
+                    majorDropdown.add(option);
+                });
+            }
+        }
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.getElementById('college').addEventListener('change', updateMajors);
+        });
         function updateCourses() {
             var major = document.getElementById("major").value;
             var courseSelect = document.getElementById("course_ids");
@@ -122,13 +180,41 @@
                     {value: "code7", text: "درس ۱ عمران"},
                     {value: "code8", text: "درس ۲ عمران"}
                 ],
-                "مهندسی معدن": [
-                    {value: "code9", text: "درس ۱ معدن"},
-                    {value: "code10", text: "درس ۲ معدن"}
+                "ریاضیات": [
+                    {value: "code9", text: "درس ۱ ریاضیات"},
+                    {value: "code10", text: "درس ۲ ریاضیات"}
                 ],
-                "مهندسی پلیمر": [
-                    {value: "code11", text: "درس ۱ پلیمر"},
-                    {value: "code12", text: "درس ۲ پلیمر"}
+                "فیزیک": [
+                    {value: "code11", text: "درس ۱ فیزیک"},
+                    {value: "code12", text: "درس ۲ فیزیک"}
+                ],
+                "شیمی": [
+                    {value: "code13", text: "درس ۱ شیمی"},
+                    {value: "code14", text: "درس ۲ شیمی"}
+                ],
+                "زیست‌شناسی": [
+                    {value: "code15", text: "درس ۱ زیست‌شناسی"},
+                    {value: "code16", text: "درس ۲ زیست‌شناسی"}
+                ],
+                "دامپزشکی عمومی": [
+                    {value: "code17", text: "درس ۱ دامپزشکی عمومی"},
+                    {value: "code18", text: "درس ۲ دامپزشکی عمومی"}
+                ],
+                "تخصصی": [
+                    {value: "code19", text: "درس ۱ تخصصی"},
+                    {value: "code20", text: "درس ۲ تخصصی"}
+                ],
+                "ادبیات فارسی": [
+                    {value: "code21", text: "درس ۱ ادبیات فارسی"},
+                    {value: "code22", text: "درس ۲ ادبیات فارسی"}
+                ],
+                "علوم اقتصادی": [
+                    {value: "code23", text: "درس ۱ علوم اقتصادی"},
+                    {value: "code24", text: "درس ۲ علوم اقتصادی"}
+                ],
+                "مدیریت": [
+                    {value: "code25", text: "درس ۱ مدیریت"},
+                    {value: "code26", text: "درس ۲ مدیریت"}
                 ]
             };
 
@@ -145,26 +231,32 @@
         }
     </script>
     <div class="container">
-        <h1>professors</h1>
+        <h1>Professors</h1>
         <div class="container">
             <h2>ثبت اطلاعات اساتید</h2>
             <form action="/submit_professors_info" method="POST" onsubmit="return validateForm()">
                 <div class="form-group">
-                    <label for="st_id">کد استاد:</label>
-                    <input type="text" id="st_id" name="professors_id" required autocomplete="off">
-                    <div id="error-message" class="error-message"></div>
+                    <label for="pf_id">کد استاد:</label>
+                    <input type="text" id="pf_id" name="professors_id" required autocomplete="off" maxlength="6">
+                    <div id="error-message1" class="error-message"></div>
                 </div>
                 <div class="form-group">
                     <label for="f_name">نام:</label>
-                    <input type="text" id="f_name" name="first_name" required autocomplete="off">
+                    <input type="text" id="f_name" name="first_name" required autocomplete="off" maxlength="10">
                 </div>
                 <div class="form-group">
                     <label for="l_name">نام خانوادگی:</label>
-                    <input type="text" id="l_name" name="last_name" required autocomplete="off">
+                    <input type="text" id="l_name" name="last_name" required autocomplete="off" maxlength="10">
                 </div>
                 <div class="form-group">
                     <label for="birth_date">تاریخ تولد:</label>
-                    <input type="text" id="birth_date" name="birth_date" required autocomplete="off">
+                    <div class="serial-inputs">
+                        <input type="text" id="b1" name="b1" required autocomplete="off" maxlength="4" placeholder="سال">
+                        <span>/</span>
+                        <input type="text" id="b2" name="b2" required autocomplete="off" maxlength="2" placeholder="ماه">
+                        <span>/</span>
+                        <input type="text" id="b3" name="b3" required autocomplete="off" maxlength="2" placeholder="روز">
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="city_of_birth">شهر تولد:</label>
@@ -222,15 +314,17 @@
                 </div>
                 <div class="form-group">
                     <label for="address">آدرس:</label>
-                    <input type="text" id="address" name="address" required autocomplete="off">
+                    <input type="text" id="address" name="address" required autocomplete="off" maxlength="100" >
                 </div>
                 <div class="form-group">
                     <label for="postal_code">کد پستی:</label>
-                    <input type="text" id="postal_code" name="postal_code" required autocomplete="off">
+                    <input type="text" id="postal_code" name="postal_code" required autocomplete="off" maxlength="10">
+                    <div id="error-message2" class="error-message"></div>
                 </div>
                 <div class="form-group">
                     <label for="phone_number">تلفن همراه:</label>
-                    <input type="text" id="phone_number" name="phone_number" required autocomplete="off">
+                    <input type="text" id="phone_number" name="phone_number" required autocomplete="off" maxlength="11">
+                    <div id="error-message3" class="error-message"></div>
                 </div>
                 <div class="form-group1">
                     <label for="landline">تلفن ثابت:</label>
@@ -269,26 +363,28 @@
                             <option value="087">087 - سنندج</option>
                                                     
                         </select>
-                        <input type="text" id="landline" name="landline" required autocomplete="off" maxlength="8" placeholder="شماره" width="20px">
+                        <input type="text" id="landline" name="landline" required autocomplete="off" maxlength="8" placeholder="شماره" width="20px" maxlength="8">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="national_id">کد ملی:</label>
-                    <input type="text" id="national_id" name="national_id" required autocomplete="off">
+                    <input type="text" id="national_id" name="national_id" required autocomplete="off" maxlength="10">
+                    <div id="error-message4" class="error-message"></div>
                 </div>
                 <div class="form-group">
-                    <label for="department">دانشکده:</label>
-                    <input type="text" id="department" name="department" required autocomplete="off">
+                    <label for="college">دانشکده:</label>
+                    <select id="college" name="college" required>
+                        <option value="" disabled selected>انتخاب کنید</option>
+                        <option value="فنی و مهندسی">فنی و مهندسی</option>
+                        <option value="علوم پایه">علوم پایه</option>
+                        <option value="دامپزشکی">دامپزشکی</option>
+                        <option value="ادبیات و اقتصاد">ادبیات و اقتصاد</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="major">رشته تحصیلی:</label>
                     <select id="major" name="major" required onchange="updateCourses()">
-                        <option value="مهندسی کامپیوتر">مهندسی کامپیوتر</option>
-                        <option value="مهندسی برق">مهندسی برق</option>
-                        <option value="مهندسی مکانیک">مهندسی مکانیک</option>
-                        <option value="مهندسی عمران">مهندسی عمران</option>
-                        <option value="مهندسی معدن">مهندسی معدن</option>
-                        <option value="مهندسی پلیمر">مهندسی پلیمر</option>
+                        <option value="" disabled selected aria-autocomplete="none">انتخاب کنید</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -301,8 +397,7 @@
                 <div class="form-group">
                     <label for="course_ids">دروس:</label>
                     <select id="course_ids" name="course_ids" required>
-                        <option value="" disabled selected>انتخاب کنید</option>
-                        <!-- دروس بر اساس رشته تحصیلی به روز می‌شوند -->
+                        <option value="" disabled selected aria-autocomplete="none">انتخاب کنید</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -325,7 +420,7 @@
                     $("#birth_date").persianDatepicker({
                         format: 'YYYY/MM/DD'
                     });
-                    updateCourses(); // در هنگام بارگذاری صفحه، دروس را بر اساس رشته پیش‌فرض به روزرسانی می‌کند
+                    updateCourses(); 
                 });
             </script>
         </div>

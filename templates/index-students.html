@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ثبت اطلاعات دانشجو</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Students - University Management</title>
     <script src="https://cdn.jsdelivr.net/npm/jalaali-js@0.1.0/dist/jalaali.min.js"></script>
     <link rel="stylesheet" href="/static/style.css">
     <style>
@@ -25,7 +24,7 @@
 
         
         .form-group select {
-            width: 210px; /* عرض ورودی‌ها و باکس سلکت */
+            width: 208px; /* عرض ورودی‌ها و باکس سلکت */
         }
         .form-group input{
             width:200px
@@ -121,13 +120,46 @@
 
         function validateForm() {
             var studentId = document.getElementById("st_id").value;
-            var errorField = document.getElementById("error-message");
+            var postal_code = document.getElementById("postal_code").value;
+            var phone_number = document.getElementById("phone_number").value;
+            var national_id = document.getElementById("national_id").value;
+
+            var errorField1 = document.getElementById("error-message1");
+            var errorField2 = document.getElementById("error-message2");
+            var errorField3 = document.getElementById("error-message3");
+            var errorField4 = document.getElementById("error-message4");
+
+            var valid = true;
+
             if (studentId.length !== 11) {
-                errorField.innerHTML = "شماره دانشجویی باید دقیقاً 11 رقم باشد.";
-                return false;
+                errorField1.innerHTML = "شماره دانشجویی باید دقیقاً 11 رقم باشد.";
+                valid = false;
+            } else {
+                errorField1.innerHTML = "";
             }
-            errorField.innerHTML = "";
-            return true;
+
+            if (postal_code.length !== 10) {
+                errorField2.innerHTML = "کد پستی باید 10 رقم باشد.";
+                valid = false;
+            } else {
+                errorField2.innerHTML = "";
+            }
+
+            if (phone_number.length !== 11) {
+                errorField3.innerHTML = "شماره تلفن باید 11 رقم باشد.";
+                valid = false;
+            } else {
+                errorField3.innerHTML = "";
+            }
+
+            if (national_id.length !== 10) {
+                errorField4.innerHTML = "کد ملی باید 10 رقم باشد.";
+                valid = false;
+            } else {
+                errorField4.innerHTML = "";
+            }
+
+            return valid;
         }
     </script>
     <div class="container">
@@ -138,7 +170,7 @@
                 <div class="form-group">
                     <label for="st_id">شماره دانشجویی:</label>
                     <input type="text" id="st_id" name="student_id" required autocomplete="off" maxlength="11">
-                    <div id="error-message" class="error-message"></div>
+                    <div id="error-message1" class="error-message"></div>
                 </div>
                 <div class="form-group">
                     <label for="f_name">نام:</label>
@@ -234,10 +266,12 @@
                 <div class="form-group">
                     <label for="postal_code">کد پستی:</label>
                     <input type="text" id="postal_code" name="postal_code" required autocomplete="off" maxlength="10">
+                    <div id="error-message2" class="error-message"></div>
                 </div>
                 <div class="form-group">
                     <label for="phone_number">تلفن همراه:</label>
                     <input type="text" id="phone_number" name="phone_number" required autocomplete="off" maxlength="11">
+                    <div id="error-message3" class="error-message"></div>
                 </div>
                 <div class="form-group1">
                     <label for="landline">تلفن ثابت:</label>
@@ -281,7 +315,8 @@
                 </div>
                 <div class="form-group">
                     <label for="national_id">کد ملی:</label>
-                    <input type="text" id="national_id" name="national_id" required autocomplete="off" maxlength="10">
+                    <input type="text" id="national_id" name="national_id" required autocomplete="off" maxlength="10" >
+                    <div id="error-message4" class="error-message"></div>
                 </div>
                 <div class="form-group">
                     <label for="college">دانشکده:</label>
